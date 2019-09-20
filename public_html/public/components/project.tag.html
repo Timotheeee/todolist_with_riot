@@ -1,0 +1,16 @@
+<project>
+    <button onclick="{ click }" name="{ i }">{ title }</button><br>
+    <script>
+        var s = this;
+        this.click = function () {
+            selectedproject = s.i;
+            window.location.hash = s.i;
+            $.ajax({url: "/api/project/" + s.client_id + "/issues/", method: "get"}).done(function (data2) {
+                console.log(data2);
+                allprojects[selectedproject].tasks = data2.tasks;
+                updateHTML();
+            });
+
+        }
+    </script>
+</project>

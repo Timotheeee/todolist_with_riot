@@ -1,0 +1,31 @@
+<projectsform>
+    <div id="newlists">
+        <h2>create new project:</h2>
+        <input type="text" id="newtitle" placeholder="title">
+        <button id="create" onclick="{ submit }">create</button>
+    </div>
+    <script>
+        var s = this;
+        this.submit = function () {
+            $.ajax({url: "/api/projects/", method: "post", data: {data: s.newtitle.value}}).done(function (data) {
+
+                console.log(data);
+                $.ajax({url: "/api/projects/" + data.client_id, method: "get"}).done(function (data2) {
+                    allprojects.push(data2.proj);
+                    selectedproject = allprojects.length - 1;
+//            var newproj = {title: s.newtitle.value, tasks: [], id: 0, client_id: uuid(), active: true};
+//            allprojects.push(newproj);
+                    updateHTML();
+                    saveData();
+                    s.newtitle.value = "";
+                    if (window.projectsEl)
+                        projectsEl.update();
+                    console.log(data2);
+                });
+            });
+
+        }
+
+    </script>
+
+</projectsform>

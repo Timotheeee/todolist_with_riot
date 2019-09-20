@@ -1,0 +1,90 @@
+
+
+html,body{
+  background-color: #666665;
+
+}
+
+aside{
+    float: right;
+    height: 90%;
+    width: 40%;
+    margin-left: 5%;
+    margin-right: 5%;
+    background: #aaaaaa;
+
+    text-align: center;
+    display: inline-block;
+    position: relative;
+    margin-top: 1.5em;
+}
+
+
+#main{
+    float: left;
+    height: 90%;
+    width: 40%;
+    margin-left: 5%;
+    margin-right: 5%;
+    background: #bababa;
+
+    text-align: center;
+    display: inline-block;
+    position: relative;
+    margin-top: 1.5em;
+
+}
+
+projects{
+    align-content: center;
+    display: inline-block;
+    margin-top: 1.3em;
+}
+
+#lists button{
+    width: 15em;
+    color: black;
+}
+#newtitle{
+    width: 15em;
+}
+
+#webtitle{
+   text-align: center;
+    width: -moz-available;
+    color: black ;
+    background-color: darkorange;
+}
+
+#list{
+    padding: 1em;
+
+    width: 90%;
+    overflow-y: auto;
+    margin: auto;
+
+
+}
+.listitem span{
+    margin:2px;
+}
+#datepicker{
+        margin: auto;
+    max-width: 237px;
+}
+body{
+    width: 90%;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+#container{
+    background: black;
+    height: 60em;
+    border-radius: 5em;
+}
+#mainContainer{
+    overflow-x: hidden;
+    overflow-y: auto;
+}

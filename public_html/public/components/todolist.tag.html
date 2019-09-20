@@ -1,0 +1,14 @@
+<todolist>
+    <script>
+        window.todolist = this;
+    </script>
+    <div id="mainContainer">
+        <h2 id="listTitel">current list:</h2>
+        <div id="nameDiv">
+            <div >Name:</div> <span type="text">{ allprojects[selectedproject].title }</span>
+        </div>
+        <div id="list" >
+            <todo each="{ allprojects[selectedproject].tasks }"> </todo>
+        </div>
+    </div>
+</todolist>

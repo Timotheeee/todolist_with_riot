@@ -1,0 +1,54 @@
+<todoform>
+    <div id="new-todos">
+        <form onsubmit="{
+                    submit
+                }">
+            <input type="text" placeholder="new todo" id="newinput">
+            <select id="newprio">
+                <option disabled selected="">priority</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+            </select>
+            <div id="datepicker" ref="date"></div>
+            <button id="newtodo" name="new todo" ref="submit" value="new todo">new todo</button>
+        </form>
+    </div>
+    <script>
+        var s = this;
+        this.submit = function () {
+            var title = s.newinput.value,
+                    due_date = s.datepicker.value,
+                    priority = s.newprio.value;
+            if (title === "" || priority === "priority")
+                return;
+            $.ajax({url: "/api/project/" + allprojects[selectedproject].client_id + "/issues/", method: "post", data: {title, due_date, priority}}).done(function (data) {
+                console.log("server created issue: " + data.client_id);
+                allprojects[selectedproject].tasks.push({client_id: data.client_id, done: false, due_date, id: 0, priority, title});
+                //$("#newinput").val("");
+                s.newinput.value = "";
+                updateHTML();
+                saveData();
+
+//                console.log(data);
+//                $.ajax({url: "/api/projects/" + data.client_id, method: "get"}).done(function (data2) {
+//                    allprojects.push(data2.proj);
+//                    selectedproject = allprojects.length - 1;
+////            var newproj = {title: s.newtitle.value, tasks: [], id: 0, client_id: uuid(), active: true};
+////            allprojects.push(newproj);
+//                    updateHTML();
+//                    saveData();
+//                    s.newtitle.value = "";
+//                    if (window.projectsEl)
+//                        projectsEl.update();
+//                    console.log(data2);
+//                });
+            });
+
+        }
+        setTimeout(function () {
+            $("#datepicker").datepicker({})
+        }, 0);
+
+    </script>
+</todoform>

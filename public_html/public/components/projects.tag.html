@@ -1,0 +1,22 @@
+<projects>
+    <script>
+        window.projectsEl = this;
+    </script>
+    <project each="{ allprojects }"></project>
+
+    <br>
+    <!--<button onclick="{ load }">load from server</button>-->
+    <script>
+        var s = this;
+        this.load = function () {
+            $.get("/api/", function (res) {
+                console.log(res);
+//                $.each(res.todos, function (index, todo) {
+//                    $("#todos").append($("<li>").text(todo));
+//                });
+            });
+        }
+
+
+    </script>
+</projects>

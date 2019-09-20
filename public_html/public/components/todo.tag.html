@@ -1,0 +1,26 @@
+<todo>
+    <div class="listitem">
+        <input type="checkbox" index="{ i }" class="todocheckbox" checked="{ done }" onclick="{ click }">{ due_date } { title } { priority }
+        <i onclick="{ del }" index="{ i }" class="fas fa-trash-alt"></i>
+    </div>
+    <script>
+        var s = this;
+        this.click = function(){
+            $.ajax({url: "/api/project/" + allprojects[selectedproject].client_id + "/issues/" + s.client_id, method: "put", data: {}}).done(function (data) {
+                console.log(data);
+            });
+            allprojects[selectedproject].tasks[s.i].done = !allprojects[selectedproject].tasks[s.i].done; 
+            saveData();
+        }
+        this.del = function(){
+            $.ajax({url: "/api/project/" + allprojects[selectedproject].client_id + "/issues/" + s.client_id, method: "delete", data: {index:s.i}}).done(function (data) {
+                console.log(data);
+            });
+            allprojects[selectedproject].tasks.splice(s.i, 1);
+            updateHTML();
+            saveData();
+        }
+    
+    </script>
+
+</todo>

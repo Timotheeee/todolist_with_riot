@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>WEB3 labortim</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.0/css/all.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/jquery-ui.css">
+        <link rel="stylesheet" href="css/indexStyle.css">
+        <script src="Demo.js"></script>
+        <!--<script>window.count = -1</script>-->
+    </head>
+    <body>
+        <div id="webtitle">
+            <h1>WEB3 labortim MS2</h1>
+        </div>
+        <div id="container">
+
+
+            <aside>
+                <projectsform>
+                    
+                </projectsform>
+                <projects>
+                    
+                </projects>
+            </aside>
+
+            <div id="main"> 
+                <todolist></todolist>
+                <br>
+                <todoform></todoform>
+
+            </div>
+
+        </div>
+        <script src="js/jquery-ui.js"></script>
+
+        <script type="riot/tag" src="components/todolist.tag.html"></script>
+        <script type="riot/tag" src="components/todo.tag.html"></script>
+        <script type="riot/tag" src="components/projects.tag.html"></script>
+        <script type="riot/tag" src="components/project.tag.html"></script>
+        <script type="riot/tag" src="components/todoform.tag.html"></script>
+        <script type="riot/tag" src="components/projectsform.tag.html"></script>
+        <script src="js/riot.js"></script>
+        <script>
+            riot.mount('*');
+        </script>
+    </body>
+</html>
