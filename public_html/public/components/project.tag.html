@@ -5,8 +5,8 @@
         this.click = function () {
             selectedproject = s.i;
             window.location.hash = s.i;
+            //user clicked on a project, send the id to the server to get the tasks (Issues User Stories 6)
             $.ajax({url: "/api/project/" + s.client_id + "/issues/", method: "get"}).done(function (data2) {
-                console.log(data2);
                 allprojects[selectedproject].tasks = data2.tasks;
                 updateHTML();
             });

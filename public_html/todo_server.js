@@ -17,21 +17,18 @@ function uuid() {
     });
 }
 
-//could use a db instead
 const fs = require('fs');
 function save() {
     fs.writeFile("./db.json", JSON.stringify(allprojects), function (err) {
         if (err) {
             return console.log(err);
         }
-        //console.log("The file was saved!");
     });
 }
 function load() {
     fs.readFile("./db.json", function (err, data) {
-        //console.log(data);
         if (err) {
-            return;// console.log(err);
+            return;
         }
         try {
             var res = JSON.parse(data);
@@ -40,25 +37,15 @@ function load() {
 
         }
 
-        //console.log("The file was read!");
     });
 }
 
 
 var allprojects = [];
 load();
-//        [
-////    {id: 0, client_id: uuid(), title: "learn riot", active: true, tasks: [
-////            {id: 0, client_id: uuid(), done: false, title: "ms1", due_date: "13.11.2019", priority: 3}
-////        ]},
-////    {id: 0, client_id: uuid(), title: "finish this", active: true, tasks: [
-////            {id: 0, client_id: uuid(), done: false, title: "ms2", due_date: "14.11.2019", priority: 2},
-////            {id: 0, client_id: uuid(), done: false, title: "ms3", due_date: "15.11.2019", priority: 1}
-////        ]}
-//];
+
 
 function find(id) {
-    //console.log("running find with " + id);
     for (var i = 0; i < allprojects.length; i++) {
         if (allprojects[i].client_id === id)
             return allprojects[i];
@@ -66,7 +53,6 @@ function find(id) {
 }
 
 function findIssue(id,issueid) {
-    //console.log("running find with " + id);
     var t = find(id).tasks;
     for (var i = 0; i < t.length; i++) {
         if (t[i].client_id === issueid)
@@ -80,31 +66,32 @@ app.delete('/api/projects/*', function (req, res) {
 app.put('/api/projects/*', function (req, res) {
     projects(req, res, "put");
 });
-app.get('/api/projects/*', function (req, res) { //
+app.get('/api/projects/*', function (req, res) {
     projects(req, res, "get");
 });
 app.post('/api/projects/', function (req, res) {
     projects(req, res, "post");
 });
 
-//todo
+
 function projects(req, res, type) {
     var data = req.body.data;
     var url = req.url.replace("/api/projects/", "");
     switch (type) {
         case "delete":
+            var id = find(data.id);
             allprojects.splice(id, 1);
             res.status(200).json({msg: "ok"});
             save();
             break;
-        case "put"://todo
-            //allprojects[id] = req.body.data;
+        case "put":
+            allprojects[id] = data;
             res.status(200).json({allprojects});
             break;
         case "get":
             res.status(200).json({allprojects, proj: find(url)});
             break;
-        case "post":
+        case "post"://project user story 1
             var client_id = uuid();
             allprojects.push({id: 0, client_id, title: data, active: true, tasks: []})
             res.status(200).json({client_id, allprojects});
@@ -115,8 +102,6 @@ function projects(req, res, type) {
             break;
     }
     save();
-    //console.log(JSON.stringify(req.body) + " " + type);
-    //res.status(200).json({stuff: req.body, type});
 }
 
 app.delete('/api/project/*', function (req, res) {
@@ -125,14 +110,14 @@ app.delete('/api/project/*', function (req, res) {
 app.put('/api/project/*', function (req, res) {
     project(req, res, "put");
 });
-app.get('/api/project/*', function (req, res) { //
+app.get('/api/project/*', function (req, res) { 
     project(req, res, "get");
 });
 app.post('/api/project/*', function (req, res) {
     project(req, res, "post");
 });
 
-//todo
+
 function project(req, res, type) {
     var data = req.body;
     var url = req.url.replace("/api/project/", "");
@@ -144,19 +129,16 @@ function project(req, res, type) {
             find(projectid).tasks.splice(req.body.index, 1);
             res.status(200).json({msg: "ok"});
             break;
-        case "put":
-            //allprojects[id] = req.body.data;
-            //find(projectid).tasks
+        case "put"://this is only ever used to update whether or not the issue is done
             var i = findIssue(projectid,issueid);
             i.done = !i.done;
             res.status(200).json({done:i.done});
             break;
         case "get":
-            res.status(200).json({allprojects, tasks: find(projectid).tasks});//
+            res.status(200).json({allprojects, tasks: find(projectid).tasks});
             break;
         case "post":
             var client_id = uuid();
-            //id: 0, client_id: uuid(), done: false
             var newtask = data;
             newtask.id=0;
             newtask.client_id = client_id;
@@ -169,11 +151,9 @@ function project(req, res, type) {
             break;
     }
     save();
-    //console.log(JSON.stringify(req.body) + " " + type);
-    //res.status(200).json({stuff: req.body, type});
 }
 
 
-app.listen(8000, function () {
-    console.log("ready captain.");
+app.listen(8001, function () {
+    console.log("running on 8001");
 });

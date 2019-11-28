@@ -5,6 +5,7 @@
     </div>
     <script>
         var s = this;
+        //issues user story 3 and 4
         this.click = function(){
             $.ajax({url: "/api/project/" + allprojects[selectedproject].client_id + "/issues/" + s.client_id, method: "put", data: {}}).done(function (data) {
                 console.log(data);
@@ -12,6 +13,7 @@
             allprojects[selectedproject].tasks[s.i].done = !allprojects[selectedproject].tasks[s.i].done; 
             saveData();
         }
+        //issues user story 3 and 5
         this.del = function(){
             $.ajax({url: "/api/project/" + allprojects[selectedproject].client_id + "/issues/" + s.client_id, method: "delete", data: {index:s.i}}).done(function (data) {
                 console.log(data);
