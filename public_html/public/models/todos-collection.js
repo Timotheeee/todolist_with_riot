@@ -16,3 +16,4 @@ class TodosCollection {
         this.riotjs_tag.update();
     }
 }
+ 
