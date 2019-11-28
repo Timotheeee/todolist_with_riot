@@ -1,14 +1,23 @@
-#!/usr/bin/env node
+
 
 const express = require('express'),
         bodyParser = require('body-parser'),
         morgan = require('morgan'),
         app = express();
+app.use(express.static(__dirname + '/public'));
+
+
+var server = app.listen(process.env.PORT || 8001, function () {
+    var host = server.address().address;
+    var port = server.address().port;
+    console.log('app listening at http://' + host + ':' + port);
+});
+
 
 app.use(morgan('dev'));
-app.use(express.static(__dirname + '/public'));
-// parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({extended: false}));
+
+
 
 function uuid() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
@@ -154,6 +163,3 @@ function project(req, res, type) {
 }
 
 
-app.listen(8001, function () {
-    console.log("running on 8001");
-});
